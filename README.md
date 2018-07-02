@@ -15,12 +15,12 @@ import (
 
 func main()  {
 	pConf := zapplug.CutConf{}
-	pConf.FileName = "./logs"
-	pConf.Compress = true
-	pConf.MaxAge = 3
-	pConf.MaxSize = 100
-	pConf.MaxBackups = 3
-
+	pConf.FileName = "./logs" //文件位置
+	pConf.Compress = true //是否压缩
+	pConf.MaxAge = 3 //保留旧日志文件的最大天数
+	pConf.MaxSize = 100 //文件大小 M
+	pConf.MaxBackups = 3 //保留的旧日志文件的最大数量
+	
 	client, err := elastic.NewClient(elastic.SetURL("http://localhost:9200"))
 	if err != nil {
 		fmt.Println(err)
@@ -29,8 +29,13 @@ func main()  {
 
 
 	core := zapcore.NewTee(
+		//滚动插件
 		zapplug.ZapCut(pConf,zap.NewDevelopmentEncoderConfig(),zap.DebugLevel),
-		zapplug.Es(client, "testlog", "10.106.132.4",zap.DebugLevel, zap.NewDevelopmentEncoderConfig()),
+		//es 插件
+		//testlog index
+		//zap.DebugLevel  leverl
+		//zap.NewDevelopmentEncoderConfig()  zap logconf
+		zapplug.Es(client, "testlog",zap.DebugLevel, zap.NewDevelopmentEncoderConfig()),
 	)
 	log := zap.New(core)
 	defer log.Sync()
