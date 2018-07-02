@@ -5,10 +5,11 @@ import (
 	"go.uber.org/zap"
 	"github.com/olivere/elastic"
 	"context"
+	"unsafe"
 )
-func Es(client *elastic.Client, index string, ip string, l zapcore.Level, z zapcore.EncoderConfig) zapcore.Core {
+func Es(client *elastic.Client, index string, l zapcore.Level, z zapcore.EncoderConfig) zapcore.Core {
 	elastic.NewClient()
-	es := &toes{client:client, index:index, ip:ip}
+	es := &toes{client:client, index:index}
 	es.cIndex()
 	zlvl := zap.LevelEnablerFunc(func(lvl zapcore.Level) bool {
 		return lvl >= l
@@ -20,7 +21,6 @@ func Es(client *elastic.Client, index string, ip string, l zapcore.Level, z zapc
 type toes struct {
 	client *elastic.Client
 	index string
-	ip string
 }
 
 func (this *toes) Write(p []byte) (n int, err error) {
@@ -32,7 +32,7 @@ func (this *toes) Write(p []byte) (n int, err error) {
 }
 
 func (this *toes) inset(b []byte) error {
-	_, err := this.client.Index().Index(this.index).Type("log").BodyJson(string(b)).Do(context.Background())
+	_, err := this.client.Index().Index(this.index).Type("log").BodyJson(*(*string)(unsafe.Pointer(&b))).Do(context.Background())
 	return err
 }
 
