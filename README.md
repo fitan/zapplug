@@ -1,6 +1,6 @@
 # zapplug
 **golang zap日志的插件 完成了切割 循环 最大文件限制 保存时间**
-···
+```
 package main
 
 import (
@@ -38,4 +38,4 @@ func main()  {
 		log.Info("test",zap.String("test","test"),)
 	}
 }
-···
+```
