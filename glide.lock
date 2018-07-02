@@ -1,0 +1,31 @@
+hash: f6c40c64fa6b90440d073db20210eca694438fd2ea107bf0562e20e307a5f64a
+updated: 2018-07-02T19:08:47.8983679+08:00
+imports:
+- name: github.com/mailru/easyjson
+  version: 3fdea8d05856a0c8df22ed4bc71b3219245e4485
+  subpackages:
+  - buffer
+  - jlexer
+  - jwriter
+- name: github.com/olivere/elastic
+  version: d06c9338b70fa11ac48eb82d8a84090a8d7dfd8d
+  subpackages:
+  - config
+  - uritemplates
+- name: github.com/pkg/errors
+  version: 816c9085562cd7ee03e7f8188a1cfd942858cded
+- name: go.uber.org/atomic
+  version: 1ea20fb1cbb1cc08cbd0d913a96dead89aa18289
+- name: go.uber.org/multierr
+  version: 3c4937480c32f4c13a875a1829af76c98ca3d40a
+- name: go.uber.org/zap
+  version: 7e7e266a8dbce911a49554b945538c5b950196b8
+  subpackages:
+  - buffer
+  - internal/bufferpool
+  - internal/color
+  - internal/exit
+  - zapcore
+- name: gopkg.in/natefinch/lumberjack.v2
+  version: a96e63847dc3c67d17befa69c303767e2f84e54f
+testImports: []

@@ -1,0 +1,7 @@
+package: zapplug
+import:
+- package: github.com/olivere/elastic
+- package: go.uber.org/zap
+  subpackages:
+  - zapcore
+- package: gopkg.in/natefinch/lumberjack.v2
